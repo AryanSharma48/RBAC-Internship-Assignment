@@ -1,34 +1,28 @@
 const express = require('express');
-const dotenv = require('dotenv');
-const morgan = require('morgan');
 const cors = require('cors');
+const morgan = require('morgan');
 const errorHandler = require('./middlewares/errorMiddleware');
 const v1Routes = require('./routes/v1');
 const setupSwagger = require('./config/swagger');
 
-// Load env vars
-dotenv.config();
-
 const app = express();
 
-// Body parser
 app.use(express.json());
+app.use(cors());
 
-// Dev logging middleware
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
 
-// Enable CORS
-app.use(cors());
-
-// Swagger
 setupSwagger(app);
 
-// Mount routers
 app.use('/api/v1', v1Routes);
 
-// Error handler
+// Catch unmatched routes
+app.use((req, res) => {
+  res.status(404).json({ success: false, message: 'Route not found' });
+});
+
 app.use(errorHandler);
 
 module.exports = app;

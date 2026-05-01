@@ -1,7 +1,13 @@
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
+const ApiError = require('../utils/ApiError');
 
 exports.register = async (userData) => {
+  const existing = await User.findOne({ email: userData.email });
+  if (existing) {
+    throw new ApiError('Email is already registered', 400);
+  }
+
   const user = await User.create(userData);
   return user;
 };
@@ -9,14 +15,8 @@ exports.register = async (userData) => {
 exports.login = async (email, password) => {
   const user = await User.findOne({ email }).select('+password');
 
-  if (!user) {
-    return null;
-  }
-
-  const isMatch = await user.matchPassword(password);
-
-  if (!isMatch) {
-    return null;
+  if (!user || !(await user.matchPassword(password))) {
+    throw new ApiError('Invalid email or password', 401);
   }
 
   return user;
