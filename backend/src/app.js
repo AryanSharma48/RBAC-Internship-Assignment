@@ -16,6 +16,16 @@ if (process.env.NODE_ENV === 'development') {
 
 setupSwagger(app);
 
+// Health check endpoint
+app.get('/health', (req, res) => {
+  res.status(200).json({ status: 'ok', uptime: process.uptime() });
+});
+
+// Root route
+app.get('/', (req, res) => {
+  res.status(200).json({ success: true, message: 'TaskManager API is running' });
+});
+
 app.use('/api/v1', v1Routes);
 
 // Catch unmatched routes
