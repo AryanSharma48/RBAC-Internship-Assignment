@@ -8,8 +8,8 @@ A backend-first task management system designed to demonstrate scalable API arch
 
 | Service | URL |
 |---------|-----|
-| Frontend | *(Vercel deployment URL)* |
-| Backend API | *(Render deployment URL)* |
+| Frontend | *https://rbac-internship-assignment.vercel.app* |
+| Backend API | *https://rbac-internship-assignment.onrender.com* |
 | API Docs (Swagger) | `https://rbac-internship-assignment.onrender.com/api-docs` |
 
 ---
