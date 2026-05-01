@@ -8,8 +8,9 @@ A backend-first task management system designed to demonstrate scalable API arch
 
 | Service | URL |
 |---------|-----|
-| Frontend | *https://rbac-internship-assignment.vercel.app* |
-| Backend API | *https://rbac-internship-assignment.onrender.com* |
+| Frontend | https://rbac-internship-assignment.vercel.app |
+| Backend API | https://rbac-internship-assignment.onrender.com |
+| Health Check | https://rbac-internship-assignment.onrender.com/health |
 | API Docs (Swagger) | `https://rbac-internship-assignment.onrender.com/api-docs` |
 
 ---
