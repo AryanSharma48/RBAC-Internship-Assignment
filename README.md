@@ -1,6 +1,6 @@
 # TaskManager — RBAC Internship Assignment
 
-A backend-focused full-stack task management system built to demonstrate production-level API design, clean architecture, role-based access control, and real-world engineering thinking.
+A backend-first task management system designed to demonstrate scalable API architecture, clean code practices, and real-world backend engineering decisions.
 
 ---
 
@@ -10,7 +10,7 @@ A backend-focused full-stack task management system built to demonstrate product
 |---------|-----|
 | Frontend | *(Vercel deployment URL)* |
 | Backend API | *(Render deployment URL)* |
-| API Docs (Swagger) | `<backend-url>/api-docs` |
+| API Docs (Swagger) | `https://rbac-internship-assignment.onrender.com/api-docs` |
 
 ---
 
@@ -24,6 +24,8 @@ Client → Route → Middleware (Auth / Validate / Rate Limit) → Controller �
 - **Services** — Own all business logic and DB interaction. Throw `ApiError` on failure.
 - **Middlewares** — JWT auth, RBAC, Joi validation, rate limiting, centralized error handling.
 - **Models** — Mongoose schemas with timestamps and compound indexes.
+
+This layered approach ensures clear separation of concerns, making the system easier to scale, test, and extend.
 
 ---
 
@@ -237,7 +239,7 @@ Swap `'dev'` for `'combined'` in `app.js` for production-style logs. Pipe to Win
 
 ## Real-World Considerations
 
-- **Concurrency:** MongoDB handles concurrent writes safely. For optimistic locking, add a `version` field with Mongoose's `versionKey`.
+- **Concurrency:** MongoDB ensures atomic operations at the document level; for stricter consistency, optimistic locking can be implemented using versioning.
 - **Token expiry:** Tokens expire in 30 days. Add a refresh token flow for seamless re-auth.
 - **Soft delete:** Add `isDeleted: Boolean` to Task schema and filter it in queries instead of hard-deleting.
 - **Request tracing:** Add a `requestId` middleware (`uuid`) to attach a unique ID to every request for debugging across services.
